@@ -1,0 +1,9 @@
+server:
+    port: 10001
+
+project:
+    name: yegoo-marking-mp
+
+respository:
+    root-path: C:/Users/Administrator/Desktop/repo/pub
+    store-root-path: C:/Users/Administrator/Desktop/repo/pri
