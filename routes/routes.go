@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
+	"sync"
 
 	"yegoo.com/yegoo-marking-publish/conf"
 	"yegoo.com/yegoo-marking-publish/utils"
@@ -59,6 +60,42 @@ type Title struct {
 	UsingComponents        struct{} `json:"usingComponents"`
 	NavigationBarTitleText string   `json:"navigationBarTitleText"`
 	EnablePullDownRefresh  bool     `json:"enablePullDownRefresh"`
+}
+
+// 自定义服务访问限制器
+func AccessLimiter(c *Context) {
+	var mutex sync.Mutex
+	mutex.Lock()
+	defer mutex.Unlock()
+
+	storeId := c.Query("storeId")
+	if storeId == "" {
+		err := fmt.Errorf("storeId不能为空")
+		c.Error4xx(err)
+		return
+	}
+
+	sessionName := conf.C.Session.Name
+	sessionTimeout := conf.C.Session.Timeout
+
+	cache := c.Cache
+	val := cache.Get(sessionName)
+	var sessionVal = ""
+	if val != nil {
+		sessionVal = val.(string) //类型强转
+	}
+	if sessionVal != "" && sessionVal != storeId {
+		// 无法判断是否是真的登录 只能从访问级别进行限制
+		err := fmt.Errorf("无法访问,服务占用中")
+		// fmt.Println("storeId:" + storeId + ", 当前session:" + sessionVal + ", 无法访问")
+		c.Error401(err)
+		return
+	} else {
+		// fmt.Println("storeId:" + storeId + ", 当前session:" + sessionVal + ", 访问成功")
+		cache.Put(sessionName, storeId, sessionTimeout)
+	}
+
+	return
 }
 
 // 获取登录二维码

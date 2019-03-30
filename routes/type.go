@@ -24,6 +24,11 @@ func (c *Context) Success(data interface{}) {
 	c.JSON(http.StatusOK, JSONResult{200, "", data})
 }
 
+// Error401 成功
+func (c *Context) Error401(err error) {
+	c.JSON(http.StatusOK, JSONResult{401, err.Error(), nil})
+}
+
 // Error4xx 成功
 func (c *Context) Error4xx(err error) {
 	c.JSON(http.StatusOK, JSONResult{400, err.Error(), nil})

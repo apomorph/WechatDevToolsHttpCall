@@ -22,6 +22,10 @@ type Config struct {
 	Log struct {
 		File string `yaml:"file"`
 	}
+	Session struct {
+		Name    string `yaml:"name"`
+		Timeout int64  `yaml:"timeout"` // 秒
+	}
 }
 
 // C 配置文件

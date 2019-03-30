@@ -201,7 +201,7 @@ func Close(projectpath string) (err error) {
 
 	// 读取响应内容
 	data, err := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(data))
+	// fmt.Println(string(data))
 	if err != nil {
 		return err
 	}

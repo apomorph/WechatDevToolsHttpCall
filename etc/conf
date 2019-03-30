@@ -7,3 +7,7 @@ project:
 respository:
     root-path: C:/Users/Administrator/Desktop/repo/pub
     store-root-path: C:/Users/Administrator/Desktop/repo/pri
+
+session:
+    name: mysession
+    timeout: 600
