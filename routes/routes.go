@@ -215,6 +215,10 @@ func Upload(c *Context, form XcxBaseForm) {
 	// 关闭当前项目窗口 TODO 无法关闭 原因未知
 	// defer wx.Close(xcxDir)
 
+	// 删除缓存中保存的storeId
+	sessionName := conf.C.Session.Name
+	c.Cache.Delete(sessionName)
+
 	c.Success("上传成功")
 }
 
