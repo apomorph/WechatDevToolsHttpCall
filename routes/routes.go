@@ -22,6 +22,9 @@ const (
 
 	logoPath = "/images/newslist/loginlogo.jpg" // logo图片
 
+	logoUsedFilePath = "/pages/login/login.wxml" // 使用logo图片的文件
+	logoOldPath      = "../../images/newslist/loginlogo.jpg"
+
 	confPath     = "/conf"     // 医院配置子目录
 	confFileName = "conf.json" // 医院配置文件名字
 
@@ -96,6 +99,14 @@ func AccessLimiter(c *Context) {
 	}
 
 	return
+}
+
+// 主动会话失效
+func InvalidSession(c *Context) {
+	sessionName := conf.C.Session.Name
+	c.Cache.Delete(sessionName)
+
+	c.Success("成功")
 }
 
 // 获取登录二维码
@@ -322,16 +333,18 @@ func modifyProject(dest string, form XcxConfigForm) error {
 	}
 
 	// 5). 修改logo图片 todo
-	filePath5 := dest + logoPath
-	uploadFileReader, err := form.Logo.Open()
-	if err != nil {
-		return err
-	}
-	fileData, err := ioutil.ReadAll(uploadFileReader)
-	if err != nil {
-		return err
-	}
-	err = modifyLogo(filePath5, fileData)
+	// filePath5 := dest + logoPath
+	// uploadFileReader, err := form.Logo.Open()
+	// if err != nil {
+	// 	return err
+	// }
+	// fileData, err := ioutil.ReadAll(uploadFileReader)
+	// if err != nil {
+	// 	return err
+	// }
+	// err = modifyLogo(filePath5, fileData)
+	filePath5 := dest + logoUsedFilePath
+	err = modifyLogoNew(filePath5, form.Logo)
 	if err != nil {
 		return err
 	}
@@ -453,7 +466,7 @@ func modifyTitle(filePath, newVal string) error {
 	return nil
 }
 
-// 修改logo
+// 修改logo @deprecated
 func modifyLogo(filePath string, data []byte) error {
 	_, err := ioutil.ReadFile(filePath)
 	if err != nil {
@@ -468,7 +481,24 @@ func modifyLogo(filePath string, data []byte) error {
 	return nil
 }
 
-// 查询上一次配置信息 unused
+// 修改logo
+func modifyLogoNew(filePath, logoUrl string) error {
+	file, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		return err
+	}
+	data := string(file)
+	s := strings.Replace(data, logoOldPath, logoUrl, -1)
+
+	err = ioutil.WriteFile(filePath, []byte(s), 0777)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// 查询上一次配置信息 @deprecated
 func QueryLastConfig(c *Context, form XcxBaseForm) {
 	storePath := conf.C.Respository.Store                                                                    // 小程序代码私库根目录
 	xcxConfFileName := storePath + "/" + form.StoreId + "/" + form.VersionId + confPath + "/" + confFileName // 医院配置信息文件

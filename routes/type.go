@@ -68,12 +68,13 @@ type XcxBaseForm struct {
 // 小程序配置form
 type XcxConfigForm struct {
 	XcxBaseForm
-	AppId            string                `form:"appId" binding:"Required"`            // 小程序appId
-	Logo             *multipart.FileHeader `form:"logo" binding:"Required"`             // 小程序logo图片文件 后缀必须是jpg
-	TabFont          string                `form:"tabFont" binding:"Required"`          // tab文字内容(5个值 逗号分隔)
-	TabColor         string                `form:"tabColor" binding:"Required"`         // tab文字的默认颜色
-	TabSelectedColor string                `form:"tabSelectedColor" binding:"Required"` // tab文字的选中颜色
-	Host             string                `form:"host" binding:"Required"`             // 医院运营系统域名
+	AppId string `form:"appId" binding:"Required"` // 小程序appId
+	// Logo             *multipart.FileHeader `form:"logo" binding:"Required"`             // 小程序logo图片文件 后缀必须是jpg
+	Logo             string `form:"logo" binding:"Required"`
+	TabFont          string `form:"tabFont" binding:"Required"`          // tab文字内容(5个值 逗号分隔)
+	TabColor         string `form:"tabColor" binding:"Required"`         // tab文字的默认颜色
+	TabSelectedColor string `form:"tabSelectedColor" binding:"Required"` // tab文字的选中颜色
+	Host             string `form:"host" binding:"Required"`             // 医院运营系统域名
 }
 
 // 公库新增版本form
@@ -131,25 +132,25 @@ func (xcf XcxConfigForm) Validate(ctx *macaron.Context, errs binding.Errors) bin
 		}
 	}
 
-	fileName := xcf.Logo.Filename
-	suffix := path.Ext(fileName)
-	if suffix != ".jpg" {
-		errs = append(errs, binding.Error{
-			FieldNames:     []string{"Logo"},
-			Classification: "ValidationError",
-			Message:        "only support .jpg",
-		})
-		return errs
-	}
-	size := xcf.Logo.Size
-	if size > 10240 { // 文件的最大大小为10K
-		errs = append(errs, binding.Error{
-			FieldNames:     []string{"Logo"},
-			Classification: "ValidationError",
-			Message:        "file max size is 10240 Byte, current file size is " + utils.Int64ToStr(size) + " Byte.",
-		})
-		return errs
-	}
+	// fileName := xcf.Logo.Filename
+	// suffix := path.Ext(fileName)
+	// if suffix != ".jpg" {
+	// 	errs = append(errs, binding.Error{
+	// 		FieldNames:     []string{"Logo"},
+	// 		Classification: "ValidationError",
+	// 		Message:        "only support .jpg",
+	// 	})
+	// 	return errs
+	// }
+	// size := xcf.Logo.Size
+	// if size > 10240 { // 文件的最大大小为10K
+	// 	errs = append(errs, binding.Error{
+	// 		FieldNames:     []string{"Logo"},
+	// 		Classification: "ValidationError",
+	// 		Message:        "file max size is 10240 Byte, current file size is " + utils.Int64ToStr(size) + " Byte.",
+	// 	})
+	// 	return errs
+	// }
 
 	return nil
 }
