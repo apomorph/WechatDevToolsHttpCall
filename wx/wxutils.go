@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"yegoo.com/yegoo-marking-publish/utils"
+	"github.com/yegoo-marking-publish/utils"
 )
 
 const (

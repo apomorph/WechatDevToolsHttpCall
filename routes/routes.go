@@ -8,9 +8,9 @@ import (
 	"strings"
 	"sync"
 
-	"yegoo.com/yegoo-marking-publish/conf"
-	"yegoo.com/yegoo-marking-publish/utils"
-	"yegoo.com/yegoo-marking-publish/wx"
+	"github.com/yegoo-marking-publish/conf"
+	"github.com/yegoo-marking-publish/utils"
+	"github.com/yegoo-marking-publish/wx"
 )
 
 const (
