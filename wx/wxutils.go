@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/yegoo-marking-publish/utils"
+	"github.com/bluecatlee/WechatDevToolsHttpCall/utils"
 )
 
 const (

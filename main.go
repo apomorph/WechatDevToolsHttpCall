@@ -1,12 +1,12 @@
 package main
 
 import (
+	"github.com/bluecatlee/WechatDevToolsHttpCall/conf"
+	"github.com/bluecatlee/WechatDevToolsHttpCall/routes"
+	"github.com/bluecatlee/WechatDevToolsHttpCall/utils"
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/cache"
 	"github.com/go-macaron/session"
-	"github.com/yegoo-marking-publish/conf"
-	"github.com/yegoo-marking-publish/routes"
-	"github.com/yegoo-marking-publish/utils"
 	macaron "gopkg.in/macaron.v1"
 )
 

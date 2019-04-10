@@ -8,9 +8,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/yegoo-marking-publish/conf"
-	"github.com/yegoo-marking-publish/utils"
-	"github.com/yegoo-marking-publish/wx"
+	"github.com/bluecatlee/WechatDevToolsHttpCall/conf"
+	"github.com/bluecatlee/WechatDevToolsHttpCall/utils"
+	"github.com/bluecatlee/WechatDevToolsHttpCall/wx"
 )
 
 const (
