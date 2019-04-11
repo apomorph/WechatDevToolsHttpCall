@@ -1,6 +1,8 @@
 # WechatDevToolsHttpCall
 基于微信开发者工具HTTP调用的微信小程序上传中间件
 
+https://www.travis-ci.org/bluecatlee/WechatDevToolsHttpCall.svg?branch=master
+
 项目背景：
     多家机构需要使用同一套小程序,并且每一家的小程序不应完全一样,为了简化小程序的发布流程,采用了自动化发布的方式,用户只需要在各自的管理后台进行版本选择、
   配置修改之后就可以发布.
