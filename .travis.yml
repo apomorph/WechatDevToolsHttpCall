@@ -8,4 +8,5 @@ go:
 env:
   - GO111MODULE=on
 
+# 需要安装微信开发者工具并打开 所以暂时跳过测试及构建
 script: true
