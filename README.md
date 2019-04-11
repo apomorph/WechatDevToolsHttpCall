@@ -1,5 +1,6 @@
 # WechatDevToolsHttpCall
-https://www.travis-ci.org/bluecatlee/WechatDevToolsHttpCall.svg?branch=master
+![](https://www.travis-ci.org/bluecatlee/WechatDevToolsHttpCall.svg?branch=master)
+
 基于微信开发者工具HTTP调用的微信小程序上传中间件
 
 项目背景：
